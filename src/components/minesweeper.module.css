@@ -1,0 +1,42 @@
+.box {
+  background-color: lightgrey;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}
+
+.box:hover {
+  cursor: pointer;
+  background-color: rgb(94, 90, 90);
+}
+
+.selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.bomb {
+  background-color: red;
+}
+
+.image {
+  width: 100px;
+}
+
+.safe {
+  background-color: rgb(94, 90, 90);
+  color: white;
+  font-size: 2rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: repeat(5, 100px);
+  grid-auto-flow: row;
+}
