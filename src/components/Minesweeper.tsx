@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getSurroundingSpaceIndices, minesweeper } from "../utils";
 import styles from "./minesweeper.module.css";
-import bombImg from "../assets/bomb.png";
+import mineImg from "../assets/bomb.png";
 import flagImg from "../assets/red-flag.png";
 
 interface MinesweeperProps {
@@ -24,8 +24,8 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     setMine(true);
 
     const image = document.createElement("img");
-    image.setAttribute("src", bombImg);
-    image.setAttribute("class", styles.bombImg);
+    image.setAttribute("src", mineImg);
+    image.setAttribute("class", styles.mineImg);
     space.appendChild(image);
     setTimeout(() => {
       setGameOver(true);
@@ -74,7 +74,13 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     const currentIndex = Number(i);
 
     if (gameResult[currentIndex] === "X") {
-      setMineSpace(selectedSpace);
+      gameResult.forEach((space, index) => {
+        if (space === "X") {
+          const mineSpace = document.querySelector(`[data-id="${index}"]`)!;
+
+          setMineSpace(mineSpace);
+        }
+      });
       return;
     }
 
