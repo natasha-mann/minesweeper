@@ -10,7 +10,8 @@ interface MinesweeperProps {
 }
 
 export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
-  const [bomb, setBomb] = useState(false);
+  const [mine, setMine] = useState(false);
+  const [mineCounter, setMineCounter] = useState(Math.sqrt(gameArray.length));
   const gameResult = minesweeper(gameArray);
 
   const setWrapperClass = () => {
@@ -18,9 +19,9 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     return `${styles.wrapper} ${styles[wrapperSize]}`;
   };
 
-  const setBombSpace = (space: Element) => {
-    space.setAttribute("class", `${styles.selected} ${styles.bomb}`);
-    setBomb(true);
+  const setMineSpace = (space: Element) => {
+    space.setAttribute("class", `${styles.selected} ${styles.mine}`);
+    setMine(true);
 
     const image = document.createElement("img");
     image.setAttribute("src", bombImg);
@@ -35,7 +36,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     const surroundingSpace = document.querySelector(`[data-id="${space}"]`)!;
 
     if (result === "X") {
-      setBombSpace(surroundingSpace);
+      setMineSpace(surroundingSpace);
       return;
     }
 
@@ -73,7 +74,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     const currentIndex = Number(i);
 
     if (gameResult[currentIndex] === "X") {
-      setBombSpace(selectedSpace);
+      setMineSpace(selectedSpace);
       return;
     }
 
@@ -108,6 +109,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     if (selectedSpace.hasChildNodes()) {
       selectedSpace.removeChild(selectedSpace.getElementsByTagName("img")[0]);
       selectedSpace.setAttribute("class", `${styles.box}`);
+      setMineCounter((prev) => (prev += 1));
     } else {
       selectedSpace.setAttribute(
         "class",
@@ -117,22 +119,26 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
       image.setAttribute("src", flagImg);
       image.setAttribute("class", styles.flagImg);
       selectedSpace.appendChild(image);
+      setMineCounter((prev) => (prev -= 1));
     }
   };
 
   return (
-    <div className={setWrapperClass()}>
-      {gameResult.map((space: string, index: number) => {
-        return (
-          <div
-            className={styles.box}
-            onClick={!bomb ? displayResult : undefined}
-            onContextMenu={toggleFlag}
-            data-id={index}
-            key={index}
-          ></div>
-        );
-      })}
-    </div>
+    <>
+      <div className={styles.mineCount}>Mines Remaining: {mineCounter}</div>
+      <div className={setWrapperClass()}>
+        {gameResult.map((space: string, index: number) => {
+          return (
+            <div
+              className={styles.box}
+              onClick={!mine ? displayResult : undefined}
+              onContextMenu={toggleFlag}
+              data-id={index}
+              key={index}
+            ></div>
+          );
+        })}
+      </div>
+    </>
   );
 };

@@ -19,11 +19,11 @@
   padding: 20px;
 }
 
-.bomb {
+.mine {
   background-color: red;
 }
 
-.bombImg {
+.mineImg {
   width: 60px;
 }
 
@@ -39,6 +39,15 @@
 
 .flagged {
   background-color: rgb(94, 90, 90);
+}
+
+.mineCount {
+  background-color: black;
+  padding: 2rem;
+  margin: 0.5rem;
+  color: red;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .wrapper {

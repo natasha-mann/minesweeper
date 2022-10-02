@@ -3,14 +3,12 @@ import { generateMines } from "../utils/generateMines";
 
 interface StartProps {
   setInPlay: React.Dispatch<React.SetStateAction<boolean>>;
-  setLevel: React.Dispatch<React.SetStateAction<number>>;
   setMines: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export const Start = ({ setInPlay, setLevel, setMines }: StartProps) => {
+export const Start = ({ setInPlay, setMines }: StartProps) => {
   const handleSelectLevel = (e: React.MouseEvent) => {
     const selectedLevel = Number(e.currentTarget.getAttribute("data-id"));
-    setLevel(selectedLevel);
     setInPlay(true);
     const mines = generateMines(selectedLevel);
     setMines(mines);
