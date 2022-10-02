@@ -10,8 +10,10 @@ interface MinesweeperProps {
 }
 
 export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
+  const totalMines = gameArray.filter((e) => e === "X").length;
+
   const [mine, setMine] = useState(false);
-  const [mineCounter, setMineCounter] = useState(Math.sqrt(gameArray.length));
+  const [mineCounter, setMineCounter] = useState(totalMines);
   const gameResult = minesweeper(gameArray);
 
   const setWrapperClass = () => {

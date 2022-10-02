@@ -1,5 +1,14 @@
 export const generateMines = (level: number) => {
-  const mineNumber = Math.sqrt(level);
+  let mineNumber = Math.sqrt(level);
+
+  if (level === 144) {
+    mineNumber += Math.floor(level / 5);
+  }
+
+  if (level === 100) {
+    mineNumber += Math.floor(level / 10);
+  }
+
   const arrayLength = level - mineNumber;
 
   const noMineArray = new Array(arrayLength).fill("-");

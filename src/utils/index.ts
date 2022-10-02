@@ -2,28 +2,34 @@ export const getSurroundingSpaceIndices = (
   index: number,
   arrLength: number
 ): number[] => {
+  const squareRoot = Math.sqrt(arrLength);
+
   let surroundingIndices = [
-    index - 6,
-    index - 5,
-    index - 4,
+    index - (squareRoot + 1),
+    index - squareRoot,
+    index - (squareRoot - 1),
     index + 1,
-    index + 6,
-    index + 5,
-    index + 4,
+    index + (squareRoot + 1),
+    index + squareRoot,
+    index + (squareRoot - 1),
     index - 1,
   ];
 
-  const squareRoot = Math.sqrt(arrLength);
-
   if ((index + 1) % squareRoot === 0) {
     surroundingIndices = surroundingIndices.filter(
-      (e) => e !== index + 6 && e !== index - 4 && e !== index + 1
+      (e) =>
+        e !== index + (squareRoot + 1) &&
+        e !== index - (squareRoot - 1) &&
+        e !== index + 1
     );
   }
 
   if (index % squareRoot === 0 || index === 0) {
     surroundingIndices = surroundingIndices.filter(
-      (e) => e !== index - 6 && e !== index + 4 && e !== index - 1
+      (e) =>
+        e !== index - (squareRoot + 1) &&
+        e !== index + (squareRoot - 1) &&
+        e !== index - 1
     );
   }
 
