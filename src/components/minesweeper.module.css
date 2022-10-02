@@ -24,11 +24,11 @@
 }
 
 .bombImg {
-  width: 100px;
+  width: 60px;
 }
 
 .flagImg {
-  width: 50px;
+  width: 40px;
 }
 
 .safe {
@@ -44,7 +44,25 @@
 .wrapper {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(5, 100px);
-  grid-template-rows: repeat(5, 100px);
   grid-auto-flow: row;
+}
+
+.wrapper25 {
+  grid-template-columns: repeat(5, 80px);
+  grid-template-rows: repeat(5, 80px);
+}
+
+.wrapper49 {
+  grid-template-columns: repeat(7, 70px);
+  grid-template-rows: repeat(7, 70px);
+}
+
+.wrapper100 {
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+}
+
+.wrapper144 {
+  grid-template-columns: repeat(12, 40px);
+  grid-template-rows: repeat(12, 40px);
 }

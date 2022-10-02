@@ -13,6 +13,11 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
   const [bomb, setBomb] = useState(false);
   const gameResult = minesweeper(gameArray);
 
+  const setWrapperClass = () => {
+    const wrapperSize = `wrapper${gameArray.length}`;
+    return `${styles.wrapper} ${styles[wrapperSize]}`;
+  };
+
   const setBombSpace = (space: Element) => {
     space.setAttribute("class", `${styles.selected} ${styles.bomb}`);
     setBomb(true);
@@ -116,7 +121,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={setWrapperClass()}>
       {gameResult.map((space: string, index: number) => {
         return (
           <div
