@@ -30,3 +30,9 @@ would return:
     "0", "0", "0", "1", "X",
 ]
 ```
+
+### TODO
+
+- How do you win? Check if only mines remain unselected?
+- Game over screen
+- Timer?

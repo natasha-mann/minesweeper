@@ -22,6 +22,10 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
   };
 
   const setMineSpace = (space: Element) => {
+    if (space.hasChildNodes()) {
+      space.removeChild(space.getElementsByTagName("img")[0]);
+    }
+
     space.setAttribute("class", `${styles.selected} ${styles.mine}`);
     setMine(true);
 
@@ -133,7 +137,12 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
 
   return (
     <>
-      <div className={styles.mineCount}>Mines Remaining: {mineCounter}</div>
+      <div className={styles.container}>
+        <div className={styles.mineCount}>Mines Remaining: {mineCounter}</div>
+        <div className={styles.tip}>
+          Tip: Right click a square to flag a mine!
+        </div>
+      </div>
       <div className={setWrapperClass()}>
         {gameResult.map((space: string, index: number) => {
           return (
