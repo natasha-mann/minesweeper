@@ -44,11 +44,6 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
   const setSurroundingSpaces = (space: number, result: string) => {
     const surroundingSpace = document.querySelector(`[data-id="${space}"]`)!;
 
-    if (result === "X") {
-      setMineSpace(surroundingSpace);
-      return;
-    }
-
     surroundingSpace.setAttribute("class", `${styles.selected} ${styles.safe}`);
     surroundingSpace.setAttribute("data-selected", "true");
 
@@ -108,7 +103,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
       });
 
       surroundingSpaces.forEach(({ result, surroundingIndex }) => {
-        if (result === "0") {
+        if (result !== "X") {
           setSurroundingSpaces(surroundingIndex, result);
         }
       });
