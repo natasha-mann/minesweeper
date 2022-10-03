@@ -1,0 +1,9 @@
+.startContainer {
+  padding: 4rem;
+  background-color: azure;
+  border-radius: 20px;
+}
+
+.btnContainer {
+  margin: 2rem;
+}

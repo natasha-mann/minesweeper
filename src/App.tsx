@@ -12,7 +12,10 @@ function App() {
 
   return (
     <div className="app">
-      <h1>MINESWEEPER</h1>
+      <div className="header">
+        <h1>MINESWEEPER</h1>
+      </div>
+
       <div className="layout">
         {!inPlay && <Start setInPlay={setInPlay} setMines={setMines} />}
         {!gameOver && inPlay && mines.length && (

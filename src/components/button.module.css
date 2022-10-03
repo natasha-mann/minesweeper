@@ -1,0 +1,33 @@
+.button {
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  opacity: 90%;
+}
+
+.button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  opacity: 100%;
+}
+
+.button25 {
+  background-color: #4ad66d;
+}
+
+.button49 {
+  background-color: #f9a620;
+}
+
+.button100 {
+  background-color: #d00000;
+  color: white;
+}
+
+.button144 {
+  background-color: black;
+  color: white;
+}

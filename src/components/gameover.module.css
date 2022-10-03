@@ -1,0 +1,51 @@
+.gameOver {
+  font-size: 5rem;
+  color: red;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  animation: drop 1s ease-out;
+  position: relative;
+  z-index: -100;
+  margin: 4rem;
+}
+
+.gameOverBtn {
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background-color: red;
+  color: white;
+  font-weight: bolder;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.2rem;
+  animation: appear 2s ease-in;
+}
+
+.gameOverBtn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-400px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

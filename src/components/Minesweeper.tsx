@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import Confetti from "react-confetti";
 import { getSurroundingSpaceIndices, minesweeper } from "../utils";
 import styles from "./minesweeper.module.css";
 import mineImg from "../assets/bomb.png";
 import flagImg from "../assets/red-flag.png";
+import { Winner } from "./Winner";
 
 interface MinesweeperProps {
   gameArray: string[];
@@ -15,6 +17,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
   const [mine, setMine] = useState(false);
   const [mineCounter, setMineCounter] = useState(totalMines);
   const gameResult = minesweeper(gameArray);
+  const [completed, setCompleted] = useState(false);
 
   const setWrapperClass = () => {
     const wrapperSize = `wrapper${gameArray.length}`;
@@ -35,7 +38,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     space.appendChild(image);
     setTimeout(() => {
       setGameOver(true);
-    }, 3000);
+    }, 1000);
   };
 
   const setSurroundingSpaces = (space: number, result: string) => {
@@ -47,6 +50,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     }
 
     surroundingSpace.setAttribute("class", `${styles.selected} ${styles.safe}`);
+    surroundingSpace.setAttribute("data-selected", "true");
 
     if (result === "0") {
       const surroundingIndices = getSurroundingSpaceIndices(
@@ -92,6 +96,7 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
 
     if (gameResult[currentIndex] === "0") {
       selectedSpace.setAttribute("class", `${styles.selected} ${styles.safe}`);
+      selectedSpace.setAttribute("data-selected", "true");
 
       const surroundingIndices = getSurroundingSpaceIndices(
         currentIndex,
@@ -109,13 +114,19 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
       });
     } else {
       selectedSpace.setAttribute("class", `${styles.selected} ${styles.safe}`);
+      selectedSpace.setAttribute("data-selected", "true");
       selectedSpace.textContent = gameResult[currentIndex];
+    }
+
+    const completed = checkForWin();
+
+    if (completed) {
+      setCompleted(true);
     }
   };
 
   const toggleFlag = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log("FLAGGED");
     const selectedSpace = e.currentTarget;
 
     if (selectedSpace.hasChildNodes()) {
@@ -135,16 +146,31 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
     }
   };
 
+  const checkForWin = (): boolean => {
+    const spaces = document.querySelector("#gameBoard")?.children!;
+    let completed = false;
+
+    const noMineSpaces = Array.from(spaces).filter(
+      (_, index) => gameResult[index] !== "X"
+    );
+
+    completed = noMineSpaces.every((space) =>
+      space.hasAttribute("data-selected")
+    );
+
+    return completed;
+  };
+
   return (
     <>
-      <div className={styles.container}>
+      <div>
         <div className={styles.mineCount}>Mines Remaining: {mineCounter}</div>
         <div className={styles.tip}>
           Tip: Right click a square to flag a mine!
         </div>
       </div>
-      <div className={setWrapperClass()}>
-        {gameResult.map((space: string, index: number) => {
+      <div id="gameBoard" className={setWrapperClass()}>
+        {gameResult.map((_: string, index: number) => {
           return (
             <div
               className={styles.box}
@@ -156,6 +182,13 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
           );
         })}
       </div>
+
+      {completed && (
+        <>
+          <Confetti />
+          <Winner />
+        </>
+      )}
     </>
   );
 };
