@@ -158,26 +158,27 @@ export const Minesweeper = ({ gameArray, setGameOver }: MinesweeperProps) => {
 
   return (
     <>
-      <div>
-        <div className={styles.mineCount}>Mines Remaining: {mineCounter}</div>
-        <div className={styles.tip}>
-          Tip: Right click a square to flag a mine!
+      <div className={styles.minesweeper}>
+        <div>
+          <div className={styles.mineCount}>Mines Remaining: {mineCounter}</div>
+          <div className={styles.tip}>
+            Tip: Right click a square to flag a mine!
+          </div>
+        </div>
+        <div id="gameBoard" className={setWrapperClass()}>
+          {gameResult.map((_: string, index: number) => {
+            return (
+              <div
+                className={styles.box}
+                onClick={!mine ? displayResult : undefined}
+                onContextMenu={toggleFlag}
+                data-id={index}
+                key={index}
+              ></div>
+            );
+          })}
         </div>
       </div>
-      <div id="gameBoard" className={setWrapperClass()}>
-        {gameResult.map((_: string, index: number) => {
-          return (
-            <div
-              className={styles.box}
-              onClick={!mine ? displayResult : undefined}
-              onContextMenu={toggleFlag}
-              data-id={index}
-              key={index}
-            ></div>
-          );
-        })}
-      </div>
-
       {completed && (
         <>
           <Confetti />

@@ -12,8 +12,15 @@
 }
 
 .header {
-  padding: 2rem 0rem;
+  padding: 5vh 0rem;
   background-color: black;
   color: white;
-  margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 480px) {
+  .layout {
+    height: 95vh;
+    justify-content: unset;
+    align-items: center;
+  }
 }

@@ -10,6 +10,7 @@
   right: 0;
   background-color: rgb(255, 255, 0);
   animation: appear 2s ease-in;
+  margin-top: 3rem;
 }
 
 .headers {
@@ -55,5 +56,26 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .winContainer {
+    width: 80%;
+    margin-top: 12rem;
+  }
+
+  .heading {
+    font-size: 1.8rem;
+  }
+
+  .subHeading {
+    font-size: 1.3rem;
+  }
+
+  .winBtn {
+    padding: 1.2rem;
+
+    font-size: 1.2rem;
   }
 }

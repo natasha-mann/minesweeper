@@ -2,8 +2,16 @@
   padding: 4rem;
   background-color: azure;
   border-radius: 20px;
+  margin-top: 3rem;
 }
 
 .btnContainer {
   margin: 2rem;
+}
+
+@media screen and (max-width: 480px) {
+  .startContainer {
+    margin-top: 0rem;
+    height: 100%;
+  }
 }
